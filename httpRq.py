@@ -12,14 +12,14 @@ headers = {
 def make_request(i):
     try:
         response = requests.get(url, headers=headers)
-        if response.status_code >= 204:
+        if 200 <= response.status_code < 300: 
             print(f"Request {i+1} OK - Status: {response.status_code}")
             return True
         else:
-            print(f"Request {i+1} NOT OK - Status: {response.status_code}")
+            print(f"Request {i+1} FAILED - Status: {response.status_code}")
             return False
     except Exception as e:
-        print(f"Request {i+1} FAILED: {e}")
+        print(f"Request {i+1} FAILED WITH EXCEPTION: {e}")
         return False
 
 start = time.time()
