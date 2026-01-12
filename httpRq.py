@@ -12,12 +12,14 @@ headers = {
 def make_request(i):
     try:
         response = requests.get(url, headers=headers)
+
         if response.ok: 
             print(f"Request {i+1} OK - Status: {response.status_code}")
             return True
         else:
             print(f"Request {i+1} FAILED - Status: {response.status_code}")
             return False
+        
     except Exception as e:
         print(f"Request {i+1} FAILED WITH EXCEPTION: {e}")
         return False
@@ -28,9 +30,16 @@ with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
     results = list(executor.map(make_request, range(NUM_REQUESTS)))
 
 end = time.time()
+
 duration = (end - start) * 1000
 
-percntSuccess = (sum(results) / NUM_REQUESTS) * 100
+successCount = sum(results)
+failCount = len(results) - successCount
+percntSuccess = (successCount / NUM_REQUESTS) * 100
+percntFailed = (failCount / NUM_REQUESTS) * 100
+
+
 print(f"\nCompleted {NUM_REQUESTS} requests in {duration:.2f}ms")
 print(f"Average: {duration/NUM_REQUESTS:.2f}ms per request")
-print(f"Success rate: {sum(results)}/{NUM_REQUESTS} ({percntSuccess:.2f}%)")
+print(f"Success rate: {successCount}/{NUM_REQUESTS} ({percntSuccess:.2f}%)")
+print(f"Failed: {failCount} ({percntFailed:.2f}%)")
