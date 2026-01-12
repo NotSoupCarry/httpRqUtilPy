@@ -12,8 +12,12 @@ headers = {
 def make_request(i):
     try:
         response = requests.get(url, headers=headers)
-        print(f"Request {i+1} OK - Status: {response.status_code}")
-        return True
+        if response.status_code >= 204:
+            print(f"Request {i+1} OK - Status: {response.status_code}")
+            return True
+        else:
+            print(f"Request {i+1} NOT OK - Status: {response.status_code}")
+            return False
     except Exception as e:
         print(f"Request {i+1} FAILED: {e}")
         return False
