@@ -26,6 +26,7 @@ with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
 end = time.time()
 duration = (end - start) * 1000
 
+percntSuccess = (sum(results) / NUM_REQUESTS) * 100
 print(f"\nCompleted {NUM_REQUESTS} requests in {duration:.2f}ms")
 print(f"Average: {duration/NUM_REQUESTS:.2f}ms per request")
-print(f"Success rate: {sum(results)}/{NUM_REQUESTS}")
+print(f"Success rate: {sum(results)}/{NUM_REQUESTS} ({percntSuccess:.2f}%)")
