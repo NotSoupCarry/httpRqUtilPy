@@ -12,7 +12,7 @@ headers = {
 def make_request(i):
     try:
         response = requests.get(url, headers=headers)
-        if 200 <= response.status_code < 300: 
+        if response.ok: 
             print(f"Request {i+1} OK - Status: {response.status_code}")
             return True
         else:
