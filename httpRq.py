@@ -41,5 +41,6 @@ percntFailed = (failCount / NUM_REQUESTS) * 100
 
 print(f"\nCompleted {NUM_REQUESTS} requests in {duration:.2f}ms")
 print(f"Average: {duration/NUM_REQUESTS:.2f}ms per request")
+
 print(f"\nSuccess rate: {successCount}/{NUM_REQUESTS} ({percntSuccess:.2f}%)")
 print(f"Failed: {failCount} ({percntFailed:.2f}%)")
